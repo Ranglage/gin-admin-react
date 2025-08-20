@@ -114,18 +114,14 @@ class AdminLayout extends React.PureComponent {
         return;
       }
 
-      let isParent = false;
-      for (let i = 0; i < openKeys.length - 1; i += 1) {
-        const item = menuMap[openKeys[i]] || {};
+      const isParent = openKeys.slice(0, -1).some(key => {
+        const item = menuMap[key] || {};
         let path = item.id;
         if (item.parent_path !== '') {
           path = `${item.parent_path}/${path}`;
         }
-        if (lastItem.parent_path === path) {
-          isParent = true;
-          break;
-        }
-      }
+        return lastItem.parent_path === path;
+      });
 
       if (!isParent) {
         this.dispatch({

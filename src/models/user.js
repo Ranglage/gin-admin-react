@@ -160,19 +160,13 @@ export default {
         }
         message.success(msg);
         const data = yield select(state => state.user.data);
-        const newData = { list: [], pagination: data.pagination };
-
-        for (let i = 0; i < data.list.length; i += 1) {
-          const item = data.list[i];
-          if (item.id === payload.id) {
-            item.status = payload.status;
-          }
-          newData.list.push(item);
-        }
+        const newList = data.list.map(item =>
+          item.id === payload.id ? { ...item, status: payload.status } : item,
+        );
 
         yield put({
           type: 'saveData',
-          payload: newData,
+          payload: { list: newList, pagination: data.pagination },
         });
       }
     },
