@@ -13,10 +13,9 @@ export default ({ code, children, ...rest }) => {
           const item = menuPaths[window.location.pathname];
           if (item && item.actions) {
             const { actions } = item;
-            for (let i = 0; i < actions.length; i += 1) {
-              if (actions[i].code === code) {
-                return <Button {...rest}>{children}</Button>;
-              }
+            const hasAction = actions.some(action => action.code === code);
+            if (hasAction) {
+              return <Button {...rest}>{children}</Button>;
             }
           }
         }

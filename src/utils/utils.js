@@ -1,6 +1,6 @@
 import moment from 'moment';
 import md5 from 'md5';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
 // 格式化时间戳
 export function formatTimestamp(val, format) {
@@ -37,5 +37,5 @@ export function md5Hash(value) {
 
 // 创建UUID
 export function newUUID() {
-  return uuid();
+  return uuidv4();
 }

@@ -64,15 +64,15 @@ export default {
       const menuPaths = {};
       const menuMap = {};
       function fillData(data) {
-        for (let i = 0; i < data.length; i += 1) {
-          menuMap[data[i].id] = data[i];
-          if (data[i].router !== '') {
-            menuPaths[data[i].router] = data[i];
+        data.forEach(item => {
+          menuMap[item.id] = item;
+          if (item.router !== '') {
+            menuPaths[item.router] = item;
           }
-          if (data[i].children && data[i].children.length > 0) {
-            fillData(data[i].children);
+          if (item.children && item.children.length > 0) {
+            fillData(item.children);
           }
-        }
+        });
       }
       fillData(menuData);
 
